@@ -1,4 +1,4 @@
-/* 
+/*
 SQLyog Ultimate v11.11 (32 bit)
 MySQL - 5.1.41-community : Database - mint
 *********************************************************************
@@ -15,6 +15,65 @@ MySQL - 5.1.41-community : Database - mint
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`mint` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `mint`;
+
+/*Table structure for table `bank_mstr` */
+
+DROP TABLE IF EXISTS `bank_mstr`;
+
+CREATE TABLE `bank_mstr` (
+  `bank_mstr_id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(9) DEFAULT NULL,
+  `bank_name` varchar(199) DEFAULT NULL,
+  `bank_category` varchar(99) DEFAULT NULL,
+  `officer_name` varchar(99) DEFAULT NULL,
+  `officer_designation` varchar(99) DEFAULT NULL,
+  `officer_address1` varchar(99) DEFAULT NULL,
+  `officer_address2` varchar(99) DEFAULT NULL,
+  `officer_pincode` int(9) unsigned DEFAULT NULL,
+  `officer_mobile` varchar(15) DEFAULT NULL,
+  `officer_telphone` varchar(15) DEFAULT NULL,
+  `officer_fax` int(22) unsigned DEFAULT NULL,
+  `officer_email` varchar(99) DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  KEY `bank_master_id` (`bank_mstr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `bank_mstr` */
+
+insert  into `bank_mstr`(`bank_mstr_id`,`user_id`,`bank_name`,`bank_category`,`officer_name`,`officer_designation`,`officer_address1`,`officer_address2`,`officer_pincode`,`officer_mobile`,`officer_telphone`,`officer_fax`,`officer_email`,`created_date`) values (1,1,'ABC BANK','UCB','abc','compliance Officer','sfsdf','sdfsd',500018,'918988989845','040234567',123499,'xyz@gmail.com','2019-08-14');
+
+/*Table structure for table `branch_mstr` */
+
+DROP TABLE IF EXISTS `branch_mstr`;
+
+CREATE TABLE `branch_mstr` (
+  `branch_mstr_id` int(9) NOT NULL AUTO_INCREMENT,
+  `bank_mstr_id` int(9) DEFAULT NULL,
+  `user_id` int(9) DEFAULT NULL,
+  `branch_code` int(5) DEFAULT NULL,
+  `name` varchar(299) DEFAULT NULL,
+  `address` varchar(299) DEFAULT NULL,
+  `country` varchar(99) DEFAULT NULL,
+  `state` varchar(199) DEFAULT NULL,
+  `district` varchar(199) DEFAULT NULL,
+  `city` varchar(199) DEFAULT NULL,
+  `village` varchar(199) DEFAULT NULL,
+  `pincode` int(9) DEFAULT NULL,
+  `phone` int(20) DEFAULT NULL,
+  `mobile_no` int(15) DEFAULT NULL,
+  `email` varchar(99) DEFAULT NULL,
+  `fax` int(25) DEFAULT NULL,
+  `in_charge` varchar(199) DEFAULT NULL,
+  `designation` varchar(199) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `ifsc_code` varchar(99) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  KEY `branch_master_id` (`branch_mstr_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `branch_mstr` */
+
+insert  into `branch_mstr`(`branch_mstr_id`,`bank_mstr_id`,`user_id`,`branch_code`,`name`,`address`,`country`,`state`,`district`,`city`,`village`,`pincode`,`phone`,`mobile_no`,`email`,`fax`,`in_charge`,`designation`,`status`,`ifsc_code`,`created_date`) values (1,1,NULL,17,'Demo Branch','Demo Branch Address','india','telangana','hyderabad','hyderabad','Vanasthalipuram',500022,402569857,658974569,'vanastalipuram@bank.com',32547899,'258','xyz',1,'bank000001236','2017-12-28 13:20:47');
 
 /*Table structure for table `txn_mstr` */
 
@@ -51,14 +110,24 @@ CREATE TABLE `user` (
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `first_name` varchar(99) DEFAULT NULL,
+  `second_name` varchar(99) DEFAULT NULL,
+  `third_name` varchar(99) DEFAULT NULL,
+  `father_name` varchar(99) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `email_id` varchar(99) DEFAULT NULL,
   `mobile` varchar(15) DEFAULT NULL,
   `imei` varchar(55) DEFAULT NULL,
   `finger_print` varchar(55) DEFAULT NULL,
   `aadhar_no` varchar(25) DEFAULT NULL,
-  `email_id` varchar(45) DEFAULT NULL,
-  `bank` varchar(45) DEFAULT NULL,
+  `pan_number` varchar(15) DEFAULT NULL,
+  `bank` varchar(99) DEFAULT NULL,
   `branch_code` int(15) DEFAULT NULL,
-  `city` varchar(45) DEFAULT NULL,
+  `city` varchar(99) DEFAULT NULL,
+  `district` varchar(99) DEFAULT NULL,
+  `state` varchar(99) DEFAULT NULL,
+  `res_address` varchar(299) DEFAULT NULL,
+  `per_address` varchar(299) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
   PRIMARY KEY (`user_id`,`username`),
   KEY `users_id` (`user_id`)
@@ -66,7 +135,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`user_id`,`username`,`password`,`enabled`,`mobile`,`imei`,`finger_print`,`aadhar_no`,`email_id`,`bank`,`branch_code`,`city`,`created_date`) values (1,'admin','123456',1,NULL,NULL,NULL,NULL,'admin@gmail.com','abc',1,'Hyderabad','2019-05-09'),(2,'manager','123456',1,NULL,NULL,NULL,NULL,'manager@gmail.com','abc',1,'Hyderabad','2019-05-09'),(3,'supervisor','123456',1,NULL,NULL,NULL,NULL,'supervisor@gmail.com','abc',1,'Hyderabad','2019-05-09'),(4,'agent','123456',1,'9557899166','imei_9557899166','FINGER_PRINT_9557899166','1234567899','agent@gmail.com','abc',1,'Hyderabad','2019-05-09'),(5,'vagent','123456',1,NULL,NULL,NULL,NULL,'vagent@gmail.com','abc',1,'Hyderabad','2019-05-24'),(6,'vagent1','123456',1,NULL,NULL,NULL,NULL,'vagent1@gmail.com','abc',1,'Hyderabad','2019-05-24'),(7,'bkmanager','123456',1,NULL,NULL,NULL,NULL,'bkmanager@gmail.com','abc',1,'Hyderabad','2019-07-24'),(8,'agent1','123456',1,'9557899199','imei_9557899199','FINGER_PRINT_9557899199',NULL,'agent1@gmail.com','abc',1,'Hyderabad','2019-08-02');
+insert  into `user`(`user_id`,`username`,`password`,`enabled`,`first_name`,`second_name`,`third_name`,`father_name`,`dob`,`email_id`,`mobile`,`imei`,`finger_print`,`aadhar_no`,`pan_number`,`bank`,`branch_code`,`city`,`district`,`state`,`res_address`,`per_address`,`created_date`) values (1,'admin','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'admin@gmail.com','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-05-09'),(2,'manager','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'manager@gmail.c','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-05-09'),(3,'supervisor','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'supervisor@gmai','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-05-09'),(4,'agent','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,'9557899166','imei_9557899166','FINGER_PRINT_9557899166','1234567899','agent@gmail.com','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-05-09'),(5,'vagent','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vagent@gmail.co','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-05-24'),(6,'vagent1','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'vagent1@gmail.c','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-05-24'),(7,'bkmanager','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'bkmanager@gmail','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-07-24'),(8,'agent1','123456',1,NULL,NULL,NULL,NULL,NULL,NULL,'9557899199','imei_9557899199','FINGER_PRINT_9557899199',NULL,'agent1@gmail.co','abc',1,'Hyderabad',NULL,NULL,NULL,NULL,'2019-08-02');
 
 /*Table structure for table `user_roles` */
 
